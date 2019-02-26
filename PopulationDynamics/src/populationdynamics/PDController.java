@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package populationdynamics;
 
 import java.net.URL;
@@ -17,9 +13,11 @@ import javafx.scene.shape.Polygon;
 
 /**
  *
- * @author lxz19
+ * @author Lin Xiao Zheng
  */
 public class PDController implements Initializable {
+    
+    Polygon[] hexGrid;
     
     @FXML
     private AnchorPane pane;
@@ -35,8 +33,25 @@ public class PDController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Polygon hexagon = new Polygon(new Hexagon(100d).getPoints());
+        Hexagon center = new Hexagon(50d);
+        Hexagon shift = new Hexagon(50d, 100d, 100d);
+        Polygon hexagon = new Polygon(center.getPoints());
+        Polygon hex2 = new Polygon(shift.getPoints());
+        
+//        for(int i = 0; i < shift.getPoints().length; i++){
+//            System.out.println(center.getPoints()[i]);
+//            System.out.println(shift.getPoints()[i]);
+//        }
+        
+        for(double a: center.getCenter()){
+            System.out.println(a);
+        }
+        for(double a: shift.getCenter()){
+            System.out.println(a);
+        }        
+        
         addToPane(hexagon);
+        addToPane(hex2);
     }    
     
 }
