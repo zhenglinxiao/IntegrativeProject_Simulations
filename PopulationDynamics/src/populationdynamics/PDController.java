@@ -8,10 +8,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 
 /**
@@ -26,8 +32,59 @@ public class PDController implements Initializable {
     private AnchorPane pane;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-    }
+    private VBox dataBox;
+    
+    @FXML
+    private ToggleGroup preset;
+    
+    @FXML
+    private TextField speciesName;
+    
+    @FXML
+    private ComboBox selectPreset;
+    
+    @FXML
+    private ComboBox survivorshipType;
+    
+    @FXML
+    private Slider capacity;
+    
+    @FXML
+    private Slider lifespan;
+    
+    @FXML
+    private Slider offspring;
+    
+    @FXML
+    private Slider initialPop;
+    
+    @FXML 
+    private Label intrinsicRate;
+    
+    @FXML
+    private Label netRepRate;
+    
+    @FXML
+    private Label meanGenTime;
+    
+    @FXML
+    private Label capacityLabel;
+    
+    @FXML
+    private Label lifespanLabel;
+    
+    @FXML
+    private Label offspringLabel;
+    
+    @FXML 
+    private Label initialPopLabel;
+    
+    @FXML
+    private Button start;
+    
+//    @FXML
+//    private void handleButtonAction(ActionEvent event) {
+//    }
     
     public void addToPane(Node node) {
         pane.getChildren().add(node);
@@ -35,21 +92,19 @@ public class PDController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        Hexagon center = new Hexagon(30d, 150d, 150d);
-//        
-//        Polygon hex = new Polygon(new Hexagon(10d, 100d, 100d).getPoints());
-//        addToPane(hex);
-//        
-//        HexGrid test = new HexGrid(center, 3);
-//        ArrayList<Hexagon> grid = test.getHexGrid();
-//        
-//        for(Hexagon h: grid){
-//            Polygon temp = new Polygon(h.getPoints());
-//            temp.setFill(Color.TRANSPARENT);
-//            temp.setStroke(Color.BLACK);
-//            addToPane(temp);
-//        }
+        Hexagon center = new Hexagon(30d, 480, 120);
         
+        HexGrid test = new HexGrid(center, 4);
+        ArrayList<Hexagon> grid = test.getHexGrid();
+        
+        for(Hexagon h: grid){
+            Polygon temp = new Polygon(h.getPoints());
+            temp.setFill(Color.TRANSPARENT);
+            temp.setStroke(Color.BLACK);
+            addToPane(temp);
+        }
+        
+        // initialize combobox values
     }    
     
 }
