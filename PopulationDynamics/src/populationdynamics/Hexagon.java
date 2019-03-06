@@ -9,12 +9,13 @@ import java.util.Arrays;
  */
 public class Hexagon {
 
-    double[] points = new double[12];
-    double[] center = new double[2]; // Initializes to [0, 0]
-    double halfHeight;
-    double side;
-    double width;
-    double height;
+    private double[] points = new double[12];
+    private double[] center = new double[2]; // Initializes to [0, 0]
+    private double halfHeight;
+    private double side;
+    private double width;
+    private double height;
+    private int[] coordinates = new int[2];
 
     public Hexagon(double side, double x, double y) { // change x, y to center and recalculate points?
         this.side = side;
@@ -44,6 +45,11 @@ public class Hexagon {
     public Hexagon(double side) {
         this(side, 0, 0);
     }
+    
+    public void setCoordinates(int q, int r){
+        coordinates[0] = q;
+        coordinates[1] = r;
+    }
 
     public double getWidth(){
         return width;
@@ -57,8 +63,16 @@ public class Hexagon {
         return halfHeight;
     }
     
+    public double getSide(){
+        return side;
+    }
+    
     public double[] getCenter(){
         return center;
+    }
+    
+    public int[] getCoordinates(){
+        return coordinates;
     }
 
     public double[] getPoints() {
