@@ -14,36 +14,50 @@
 
 <AnchorPane id="AnchorPane" fx:id="pane" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="populationdynamics.PDController">
    <children>
-      <RadioButton layoutX="19.0" layoutY="97.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" text="Select a preset">
-         <toggleGroup>
-            <ToggleGroup fx:id="preset" />
-         </toggleGroup>
-         <font>
-            <Font name="System Italic" size="14.0" />
-         </font>
-      </RadioButton>
-      <RadioButton layoutX="20.0" layoutY="166.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" text="Create my own!" toggleGroup="$preset">
-         <font>
-            <Font name="System Italic" size="14.0" />
-         </font></RadioButton>
-      <ComboBox fx:id="selectPreset" disable="true" layoutX="52.0" layoutY="134.0" prefWidth="150.0" />
-      <VBox fx:id="dataBox" disable="true" layoutX="52.0" layoutY="208.0" prefHeight="313.0" prefWidth="207.0" spacing="8.0">
+      <AnchorPane fx:id="optionsBox" layoutX="1.0" layoutY="80.0" prefHeight="453.0" prefWidth="309.0">
          <children>
-            <Label text="Name your species:" />
-            <TextField fx:id="speciesName" maxWidth="150.0" prefHeight="25.0" prefWidth="100.0" />
-            <Label text="Enter the lifespan of species:" />
-            <Slider fx:id="lifespan" />
-            <Label text="Enter the average size of a litter:" />
-            <Slider fx:id="offspring" />
-            <Label prefWidth="169.0" text="Enter the initial population: " />
-            <Slider fx:id="initialPop" />
-            <Label text="Enter the carrying capacity of the area:" />
-            <Slider fx:id="capacity" />
-            <Label text="Select a survivorship curve type:" />
-            <ComboBox fx:id="survivorshipType" prefWidth="150.0" />
+            <RadioButton layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#presetRadioButton" prefHeight="30.0" prefWidth="128.0" selected="true" text="Select a preset">
+               <toggleGroup>
+                  <ToggleGroup fx:id="preset" />
+               </toggleGroup>
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </RadioButton>
+            <RadioButton layoutX="26.0" layoutY="83.0" mnemonicParsing="false" onAction="#createRadioButton" prefHeight="30.0" prefWidth="159.0" text="Create my own!" toggleGroup="$preset">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </RadioButton>
+            <ComboBox fx:id="selectPreset" layoutX="58.0" layoutY="51.0" prefWidth="150.0" />
+            <VBox fx:id="dataBox" disable="true" layoutX="58.0" layoutY="125.0" prefHeight="313.0" prefWidth="207.0" spacing="8.0">
+               <children>
+                  <Label text="Name your species:" />
+                  <TextField fx:id="speciesName" maxWidth="150.0" prefHeight="25.0" prefWidth="100.0" />
+                  <Label text="Enter the lifespan of species:" />
+                  <Slider fx:id="lifespan" majorTickUnit="1.0" max="500.0" minorTickCount="0" snapToTicks="true" />
+                  <Label text="Enter the average size of a litter:" />
+                  <Slider fx:id="offspring" majorTickUnit="1.0" max="1000.0" minorTickCount="0" snapToTicks="true" />
+                  <Label prefWidth="169.0" text="Enter the initial population: " />
+                  <Slider fx:id="initialPop" majorTickUnit="1.0" max="200.0" minorTickCount="0" snapToTicks="true" />
+                  <Label text="Enter the carrying capacity of the area:" />
+                  <Slider fx:id="capacity" majorTickUnit="100.0" max="5000.0" minorTickCount="0" snapToTicks="true" />
+                  <Label text="Select a survivorship curve type:" />
+                  <ComboBox fx:id="survivorshipType" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <Label fx:id="capacityLabel" layoutX="265.0" layoutY="349.0" />
+            <Label fx:id="lifespanLabel" layoutX="265.0" layoutY="206.0" />
+            <Label fx:id="offspringLabel" layoutX="265.0" layoutY="255.0" />
+            <Label fx:id="initialPopLabel" layoutX="265.0" layoutY="302.0" />
          </children>
-      </VBox>
-      <Button fx:id="start" layoutX="76.0" layoutY="539.0" mnemonicParsing="false" text="START SIMULATION!">
+      </AnchorPane>
+      <Button fx:id="start" layoutX="66.0" layoutY="539.0" mnemonicParsing="false" onAction="#startSimulation" prefHeight="30.0" prefWidth="176.0" text="START SIMULATION!">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="restart" disable="true" layoutX="69.0" layoutY="539.0" mnemonicParsing="false" onAction="#restartSimulation" text="RESTART SIMULATION!" visible="false">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -68,9 +82,5 @@
             <Label fx:id="meanGenTime" />
          </children>
       </VBox>
-      <Label fx:id="lifespanLabel" layoutX="266.0" layoutY="290.0" />
-      <Label fx:id="initialPopLabel" layoutX="266.0" layoutY="385.0" />
-      <Label fx:id="offspringLabel" layoutX="266.0" layoutY="338.0" />
-      <Label fx:id="capacityLabel" layoutX="266.0" layoutY="433.0" />
    </children>
 </AnchorPane>

@@ -15,18 +15,30 @@ public class PDUtils {
     static double netRepRate;
     static double meanGenTime;
     
-    private static void setSurvivorshipCurve(int type){
+    private static void setSurvivorshipCurve(int lifespan, int type){
+        survivorshipCurve = new double[lifespan];
+        
         switch(type){
-            case 1:
+            case 1: 
+                for(int i = 0; i < survivorshipCurve.length; i++){
+                    survivorshipCurve[i] = - Math.exp(Math.log(101) / lifespan) * i + 101;
+                };break;
             case 2:
+                for(int i = 0; i < survivorshipCurve.length; i++){
+                    survivorshipCurve[i] = (-100 / lifespan) * i + 100;
+                };break;          
             case 3:
-            default: // EXCEPTION 
+                for(int i = 0; i < survivorshipCurve.length; i++){
+                    survivorshipCurve[i] = 13 * (- Math.log(i) + Math.log(lifespan));
+                };
+                survivorshipCurve[0] = 100; break;
+            default: System.out.println("survivorship switch"); break;
         }
     }
 
     public static void setData(int lifespan, int numOffspring, int type){
         // Survivorship Curve
-        setSurvivorshipCurve(type);
+        setSurvivorshipCurve(lifespan, type);
         
         // Net reproductive rate
         netRepRate = 0;
