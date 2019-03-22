@@ -12,13 +12,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -34,6 +36,13 @@ public class PDController implements Initializable {
     private ArrayList<Polygon> hexGrid = new ArrayList();
     private boolean isPreset;
     private DecimalFormat integer = new DecimalFormat("#");
+    private DecimalFormat twoDecimals = new DecimalFormat("#.##");
+    
+    @FXML
+    private LineChart survivorship;
+    
+    @FXML
+    private LineChart popVsTime;
     
     @FXML
     private AnchorPane pane;
@@ -121,12 +130,32 @@ public class PDController implements Initializable {
         optionsBox.setDisable(true);
         
         // Output data
-        PDUtils.setData((int)lifespan.getValue(), (int)offspring.getValue(), determineType((String)survivorshipType.getValue()));
-        intrinsicRate.setText("" + PDUtils.getRate());
-        netRepRate.setText("" + PDUtils.getNetRepRate());
-        meanGenTime.setText("" + PDUtils.getMeanGenTime());
+        if(!isPreset){
+            PDUtils.setData((int)lifespan.getValue(), (int)offspring.getValue(), determineType((String)survivorshipType.getValue()));
+        }
+        else{
+            System.out.println("preset");
+        }
+        intrinsicRate.setText(twoDecimals.format(PDUtils.getRate()));
+        netRepRate.setText(twoDecimals.format(PDUtils.getNetRepRate()));
+        meanGenTime.setText(twoDecimals.format(PDUtils.getMeanGenTime()));        
         
-        // Animation timer for graphs and hexgrid
+        // Start animation timer
+        // Graphs: to animate, create timer and add data as you go
+        
+        Series s = new Series();
+        for(int i = 0; i < PDUtils.getSurvivorshipCurve().length; i++){
+            s.getData().add(new Data(i, PDUtils.getSurvivorshipCurve()[i]));
+        }
+        survivorship.getData().add(s);
+        
+        Series p = new Series();
+        for(int j = 0; j < 100; j++){
+            p.getData().add(new Data(j, PDUtils.equation((int)capacity.getValue(), (int)initialPop.getValue(), j)));
+        }
+        popVsTime.getData().add(p);
+
+        // HexGrid
     }
     
     @FXML
@@ -146,6 +175,8 @@ public class PDController implements Initializable {
         meanGenTime.setText("");
         
         // Reset graphs
+        survivorship.getData().clear();
+        popVsTime.getData().clear();
         
         // Reset hex grid
     }
@@ -170,9 +201,11 @@ public class PDController implements Initializable {
         // ComboBox elements; ENUMS?
         String[] animalList = {"bear", "wolf"};
         selectPreset.getItems().addAll(Arrays.asList(animalList));
+        selectPreset.setValue(animalList[0]);
         
         String[] types = {"Type 1", "Type 2", "Type 3"};
         survivorshipType.getItems().addAll(Arrays.asList(types));
+        survivorshipType.setValue(types[0]);
         
         // Update slider value labels
         capacity.valueProperty().addListener(new ChangeListener(){
@@ -201,7 +234,14 @@ public class PDController implements Initializable {
             public void changed(ObservableValue arg0, Object arg1, Object arg2){
                 initialPopLabel.setText(integer.format(initialPop.getValue()));
             }
-        });         
+        }); 
+
+        // Graphs
+        survivorship.getXAxis().setLabel("time (years)");
+        survivorship.getYAxis().setLabel("surviving percentage of population (%)");
+        
+        popVsTime.getXAxis().setLabel("time (years)");
+        popVsTime.getYAxis().setLabel("population");
         
         // Create HexGrid
         Hexagon center = new Hexagon(30d, 480, 120);
