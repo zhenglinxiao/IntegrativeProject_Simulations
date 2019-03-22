@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
@@ -37,6 +37,63 @@ public class PDController implements Initializable {
     private boolean isPreset;
     private DecimalFormat integer = new DecimalFormat("#");
     private DecimalFormat twoDecimals = new DecimalFormat("#.##");
+    long initialTime = System.nanoTime();
+    double lastFrameTime = 0.0f;
+    double timeSinceLastUpdate = 0;
+    Series pop = new Series();
+    int timeStep = 0;
+    int hexIndex = 0;
+    double popRemainder = 0;
+    double lastPopulation = 0;
+    
+    private void resetTimer(){
+        pop.getData().clear();        
+        lastFrameTime = 0.0f;
+        timeSinceLastUpdate = 0;
+        timeStep = 0;
+        hexIndex = 0;
+        popRemainder = 0;
+        lastPopulation = 0;
+    }
+    
+    private AnimationTimer timer = new AnimationTimer(){
+        @Override
+        public void handle(long now){
+            // Time calculations
+            double currentTime = (now - initialTime) / 1000000000.0;
+            double frameDeltaTime = currentTime - lastFrameTime;
+            lastFrameTime = currentTime; 
+            
+            timeSinceLastUpdate += frameDeltaTime;
+            if(timeSinceLastUpdate > 1.0){
+                // Graph update
+                double population = PDUtils.equation((int)capacity.getValue(), (int)initialPop.getValue(), timeStep);
+                pop.getData().add(new Data(timeStep, population));
+     
+                
+                // HexGrid update
+                hexTimeStep.setText("Year " + timeStep);
+                double popPerHex = capacity.getValue() / hexGrid.size();
+                double popIncrease = population - lastPopulation;
+                int hexUsed = (int)((popIncrease + popRemainder) / popPerHex);
+                popRemainder = (popIncrease + popRemainder) - hexUsed * popPerHex;
+                
+                for(int i = 0; i < hexUsed; i++){
+                    hexGrid.get(hexIndex).setFill(Color.AQUA);
+                    hexIndex++;
+                }
+                
+                if(Math.ceil(population) >= capacity.getValue()){
+                    hexGrid.get(hexGrid.size() - 1).setFill(Color.AQUA);
+                    timer.stop();
+                }    
+                
+                timeStep++;
+                timeSinceLastUpdate = 0.0f;
+                lastPopulation = population;
+            }
+        }
+    };
     
     @FXML
     private LineChart survivorship;
@@ -76,6 +133,9 @@ public class PDController implements Initializable {
     
     @FXML
     private Slider initialPop;
+    
+    @FXML
+    private Label hexTimeStep;
     
     @FXML 
     private Label intrinsicRate;
@@ -119,6 +179,19 @@ public class PDController implements Initializable {
     }
     
     @FXML
+    private void bounds(ActionEvent event){
+        survivorshipType.getValue();
+        int type = determineType((String)survivorshipType.getValue());
+        switch(type){
+            case 1: lifespan.setMin(20); lifespan.setMax(200); lifespan.setValue(20);
+                    offspring.setMax(5); break;
+            case 2: lifespan.setMax(50); offspring.setMax(15); break;
+            case 3: lifespan.setMax(10); offspring.setMax(200); break;
+            default: System.out.println("bounds switch"); break;
+        }
+    }
+    
+    @FXML
     private void startSimulation(ActionEvent event){
         // Switch buttons
         restart.setVisible(true);
@@ -143,23 +216,23 @@ public class PDController implements Initializable {
         // Start animation timer
         // Graphs: to animate, create timer and add data as you go
         
+        survivorship.setTitle(speciesName.getText() + "'s survivorship curve"); 
         Series s = new Series();
         for(int i = 0; i < PDUtils.getSurvivorshipCurve().length; i++){
             s.getData().add(new Data(i, PDUtils.getSurvivorshipCurve()[i]));
         }
         survivorship.getData().add(s);
-        
-        Series p = new Series();
-        for(int j = 0; j < 100; j++){
-            p.getData().add(new Data(j, PDUtils.equation((int)capacity.getValue(), (int)initialPop.getValue(), j)));
-        }
-        popVsTime.getData().add(p);
 
-        // HexGrid
+        popVsTime.setTitle(speciesName.getText() + "'s population per year"); 
+        popVsTime.getData().add(pop);
+        popVsTime.setLegendVisible(false);
+        timer.start();       
     }
     
     @FXML
     private void restartSimulation(ActionEvent event){
+        timer.stop();
+        
         // Switch buttons
         restart.setVisible(false);
         restart.setDisable(true);
@@ -177,8 +250,12 @@ public class PDController implements Initializable {
         // Reset graphs
         survivorship.getData().clear();
         popVsTime.getData().clear();
+        resetTimer();
         
         // Reset hex grid
+        for(Polygon p: hexGrid){
+            p.setFill(Color.TRANSPARENT);
+        }
     }
     
     private int determineType(String str){
@@ -205,7 +282,6 @@ public class PDController implements Initializable {
         
         String[] types = {"Type 1", "Type 2", "Type 3"};
         survivorshipType.getItems().addAll(Arrays.asList(types));
-        survivorshipType.setValue(types[0]);
         
         // Update slider value labels
         capacity.valueProperty().addListener(new ChangeListener(){

@@ -21,7 +21,6 @@ public class PDUtils {
             case 1: 
                 for(int i = 0; i < survivorshipCurve.length; i++){
                     survivorshipCurve[i] = -Math.exp((Math.log(101f) / lifespan) * i) + 101f;  
-//                    System.out.println(survivorshipCurve[i]);
                 }
                 offspringConstant = 0.1;
                 break;
@@ -36,7 +35,7 @@ public class PDUtils {
                     survivorshipCurve[i] = 13 * (- Math.log(i) + Math.log(lifespan));
                 }
                 survivorshipCurve[0] = 100; 
-                offspringConstant = 0.7;
+                offspringConstant = 0.6;
                 break;
             default: System.out.println("survivorship switch"); break;
         }
@@ -83,7 +82,7 @@ public class PDUtils {
     }
     
     public static double equation(int capacity, int initialPop, int timeStep){
-        return capacity / ( 1 + ( capacity / initialPop - 1 ) * Math.exp(-rate * timeStep));
+        return capacity / ( 1 + ( (capacity / initialPop) - 1 ) * Math.exp(-rate * timeStep));
     }
     
     

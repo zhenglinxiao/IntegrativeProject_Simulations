@@ -36,6 +36,8 @@
                <children>
                   <Label text="Name your species:" />
                   <TextField fx:id="speciesName" maxWidth="150.0" prefHeight="25.0" prefWidth="100.0" />
+                  <Label text="Select a survivorship curve type:" />
+                  <ComboBox fx:id="survivorshipType" onAction="#bounds" prefWidth="150.0" promptText="Select..." />
                   <Label text="Enter the lifespan of species:" />
                   <Slider fx:id="lifespan" majorTickUnit="1.0" min="1.0" minorTickCount="0" snapToTicks="true" value="1.0" />
                   <Label text="Enter the average size of a litter:" />
@@ -44,14 +46,12 @@
                   <Slider fx:id="initialPop" majorTickUnit="1.0" max="200.0" min="1.0" minorTickCount="0" snapToTicks="true" value="1.0" />
                   <Label text="Enter the carrying capacity of the area:" />
                   <Slider fx:id="capacity" majorTickUnit="100.0" max="2000.0" min="1.0" minorTickCount="0" snapToTicks="true" value="1.0" />
-                  <Label text="Select a survivorship curve type:" />
-                  <ComboBox fx:id="survivorshipType" prefWidth="150.0" />
                </children>
             </VBox>
-            <Label fx:id="capacityLabel" layoutX="265.0" layoutY="349.0" />
-            <Label fx:id="lifespanLabel" layoutX="265.0" layoutY="206.0" />
-            <Label fx:id="offspringLabel" layoutX="265.0" layoutY="255.0" />
-            <Label fx:id="initialPopLabel" layoutX="265.0" layoutY="302.0" />
+            <Label fx:id="lifespanLabel" layoutX="265.0" layoutY="266.0" />
+            <Label fx:id="offspringLabel" layoutX="265.0" layoutY="315.0" />
+            <Label fx:id="initialPopLabel" layoutX="265.0" layoutY="362.0" />
+            <Label fx:id="capacityLabel" layoutX="265.0" layoutY="409.0" />
          </children>
       </AnchorPane>
       <Button fx:id="start" layoutX="66.0" layoutY="539.0" mnemonicParsing="false" onAction="#startSimulation" prefHeight="30.0" prefWidth="176.0" text="START SIMULATION!">
@@ -84,7 +84,7 @@
             <Label fx:id="meanGenTime" />
          </children>
       </VBox>
-      <LineChart fx:id="survivorship" layoutX="347.0" layoutY="23.0" legendVisible="false" prefHeight="272.0" prefWidth="417.0" title="Survivorship Curve">
+      <LineChart fx:id="survivorship" layoutX="328.0" layoutY="23.0" legendVisible="false" prefHeight="272.0" prefWidth="417.0" title="Survivorship Curve">
         <xAxis>
           <NumberAxis side="BOTTOM" />
         </xAxis>
@@ -92,7 +92,7 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <LineChart fx:id="popVsTime" layoutX="347.0" layoutY="300.0" prefHeight="272.0" prefWidth="417.0" title="Population vs time">
+      <LineChart fx:id="popVsTime" layoutX="328.0" layoutY="300.0" prefHeight="272.0" prefWidth="417.0" title="Population vs time">
         <xAxis>
           <NumberAxis side="BOTTOM" />
         </xAxis>
@@ -100,5 +100,6 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
+      <Label fx:id="hexTimeStep" layoutX="1124.0" layoutY="39.0" text="Year" />
    </children>
 </AnchorPane>
