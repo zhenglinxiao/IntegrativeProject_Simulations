@@ -22,7 +22,7 @@ public class PDUtils {
                 for(int i = 0; i < survivorshipCurve.length; i++){
                     survivorshipCurve[i] = -Math.exp((Math.log(101f) / lifespan) * i) + 101f;  
                 }
-                offspringConstant = 0.1;
+                offspringConstant = 0.08;
                 break;
             case 2:
                 for(int i = 0; i < survivorshipCurve.length; i++){
@@ -35,7 +35,7 @@ public class PDUtils {
                     survivorshipCurve[i] = 13 * (- Math.log(i) + Math.log(lifespan));
                 }
                 survivorshipCurve[0] = 100; 
-                offspringConstant = 0.6;
+                offspringConstant = 0.5;
                 break;
             default: System.out.println("survivorship switch"); break;
         }

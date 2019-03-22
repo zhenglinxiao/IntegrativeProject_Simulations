@@ -20,6 +20,7 @@ public class PopulationDynamics extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("Population Dynamics Simulator");
         stage.show();
     }
 

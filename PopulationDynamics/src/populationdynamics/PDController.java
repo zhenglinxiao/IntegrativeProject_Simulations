@@ -34,7 +34,7 @@ import javafx.scene.shape.Polygon;
 public class PDController implements Initializable {
     
     private ArrayList<Polygon> hexGrid = new ArrayList();
-    private boolean isPreset;
+    private boolean isPreset = true;
     private DecimalFormat integer = new DecimalFormat("#");
     private DecimalFormat twoDecimals = new DecimalFormat("#.##");
     long initialTime = System.nanoTime();
@@ -45,6 +45,7 @@ public class PDController implements Initializable {
     int hexIndex = 0;
     double popRemainder = 0;
     double lastPopulation = 0;
+    ArrayList<AnimalPreset> presetList = new ArrayList();
     
     private void resetTimer(){
         pop.getData().clear();        
@@ -183,10 +184,12 @@ public class PDController implements Initializable {
         survivorshipType.getValue();
         int type = determineType((String)survivorshipType.getValue());
         switch(type){
-            case 1: lifespan.setMin(20); lifespan.setMax(200); lifespan.setValue(20);
+            case 1: lifespan.setMin(10); lifespan.setMax(200); 
                     offspring.setMax(5); break;
-            case 2: lifespan.setMax(50); offspring.setMax(15); break;
-            case 3: lifespan.setMax(10); offspring.setMax(200); break;
+            case 2: lifespan.setMin(5); lifespan.setMax(100);
+                    offspring.setMax(15); break;
+            case 3: lifespan.setMin(1);lifespan.setMax(20);
+                    offspring.setMin(50); offspring.setMax(500); break;
             default: System.out.println("bounds switch"); break;
         }
     }
@@ -203,27 +206,39 @@ public class PDController implements Initializable {
         optionsBox.setDisable(true);
         
         // Output data
+        String name = "";
         if(!isPreset){
             PDUtils.setData((int)lifespan.getValue(), (int)offspring.getValue(), determineType((String)survivorshipType.getValue()));
+            name = speciesName.getText();
         }
         else{
-            System.out.println("preset");
+            name = (String)selectPreset.getValue();
+            AnimalPreset species = presetList.get(presetList.indexOf(new AnimalPreset(name, 0, 0, 0, 0, 0)));
+            PDUtils.setData(species.getLifespan(), species.getOffspring(), species.getType());
+            
+            lifespanLabel.setText(species.getLifespan() + "");
+            lifespan.setValue(species.getLifespan());
+            offspringLabel.setText(species.getOffspring() + "");
+            offspring.setValue(species.getOffspring());
+            survivorshipType.setValue("Type " + species.getType());
+            speciesName.setText(species.getName());
+            initialPopLabel.setText(species.getIniPop() + "");
+            initialPop.setValue(species.getIniPop());
+            capacityLabel.setText(species.getCapacity() + "");
+            capacity.setValue(species.getCapacity());
         }
         intrinsicRate.setText(twoDecimals.format(PDUtils.getRate()));
         netRepRate.setText(twoDecimals.format(PDUtils.getNetRepRate()));
         meanGenTime.setText(twoDecimals.format(PDUtils.getMeanGenTime()));        
         
-        // Start animation timer
-        // Graphs: to animate, create timer and add data as you go
-        
-        survivorship.setTitle(speciesName.getText() + "'s survivorship curve"); 
+        survivorship.setTitle(name + "'s survivorship curve"); 
         Series s = new Series();
         for(int i = 0; i < PDUtils.getSurvivorshipCurve().length; i++){
             s.getData().add(new Data(i, PDUtils.getSurvivorshipCurve()[i]));
         }
         survivorship.getData().add(s);
 
-        popVsTime.setTitle(speciesName.getText() + "'s population per year"); 
+        popVsTime.setTitle(name + "'s population per year"); 
         popVsTime.getData().add(pop);
         popVsTime.setLegendVisible(false);
         timer.start();       
@@ -275,10 +290,21 @@ public class PDController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // ComboBox elements; ENUMS?
-        String[] animalList = {"bear", "wolf"};
-        selectPreset.getItems().addAll(Arrays.asList(animalList));
-        selectPreset.setValue(animalList[0]);
+        // ComboBox elements
+        presetList.add(new AnimalPreset("Human", 1, 79, 1, 30, 400));
+        presetList.add(new AnimalPreset("Dog", 2, 12, 5, 10, 1000));
+        presetList.add(new AnimalPreset("African Elephant", 1, 65, 1, 50, 500));
+        presetList.add(new AnimalPreset("Galapagos Tortoise", 1, 100, 10, 5, 300));
+        presetList.add(new AnimalPreset("Rabbit", 2, 2, 6, 10, 800));
+        presetList.add(new AnimalPreset("Lion", 1, 12, 3, 5, 300));
+        presetList.add(new AnimalPreset("Goldfish", 3, 8, 500, 2, 1000));
+        presetList.add(new AnimalPreset("Blue Jay", 2, 7, 5, 2, 200));
+        
+        ArrayList<String> animalList = new ArrayList();
+        for(AnimalPreset p: presetList){
+            animalList.add(p.getName());
+        }
+        selectPreset.getItems().addAll(animalList);
         
         String[] types = {"Type 1", "Type 2", "Type 3"};
         survivorshipType.getItems().addAll(Arrays.asList(types));
