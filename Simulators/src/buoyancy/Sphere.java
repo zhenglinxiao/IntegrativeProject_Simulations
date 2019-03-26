@@ -16,6 +16,7 @@ public class Sphere {
     
     private Circle circle;
     private double volume;
+    private double mass;
     private double radius;
     
 
@@ -41,6 +42,14 @@ public class Sphere {
         circle.setLayoutY(y);
     }
     
+    public void setVolume(double volume){
+        this.volume = volume;
+    }
+    
+    public void setMass(double mass){
+        this.mass = mass;
+    }
+    
     public double getSphereX(){
          return circle.getCenterX();
      }
@@ -48,8 +57,16 @@ public class Sphere {
      public double getSphereY(){
          return circle.getCenterY();
      }
-  
+     public double getVolume(){
+         return volume;
+     }
+     
+     public double getMass(){
+         return mass;
+     }
     public void setRadius(double radius){
         this.radius = radius;
     }
+    
+ 
 }

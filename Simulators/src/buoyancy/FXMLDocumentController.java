@@ -8,6 +8,7 @@ package buoyancy;
 import java.awt.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,13 +33,13 @@ public class FXMLDocumentController implements Initializable {
     AnchorPane pane;
     
     @FXML
-   Button cube;
+    Button cube;
     
     @FXML 
-   Button rectangularPrism;
+    Button rectangularPrism;
     
     @FXML
-   Button sphere;
+    Button sphere;
     
     @FXML
     Label percentage;
@@ -96,56 +97,128 @@ public class FXMLDocumentController implements Initializable {
     //when you click the rectangular prism, set the slider disable to false and visible to true
     
    
-    
+     RectangularPrism Gary;
+     
     @FXML
     public void rectangularPrismButtonAction(ActionEvent event) {
         rec = new Rectangle(100, 50);
         rec.setLayoutX(75);
         rec.setLayoutY(273);
-        RectangularPrism Gary = new RectangularPrism(rec);
+        Gary = new RectangularPrism(rec);
         removeFromPane(circle);
         removeFromPane(square);
         addToPane(Gary.getRectangularPrism());
+        cube.setDisable(false);
+        rectangularPrism.setDisable(true);
+        sphere.setDisable(false);
+       
        
         
     }
-    
+    Cubee Rima;
     @FXML
     public void cubeButtonAction(ActionEvent event){
-        square = new Rectangle();
-        square.setLayoutX(100);
-        square.setLayoutY(100);
-        Rectangle Rima = new Rectangle(250, 250);
+        square = new Rectangle(80,80);
+        square.setLayoutX(75);
+        square.setLayoutY(273);
+        Rima = new Cubee(square);
         removeFromPane(circle);
         removeFromPane(rec);
-        addToPane(Rima);
+        addToPane(Rima.getCube());
+        cube.setDisable(true);
+        rectangularPrism.setDisable(false);
+        sphere.setDisable(false);
+        
         
     }
-    
+    Sphere Ted;
     @FXML
     public void sphereButtonAction(ActionEvent event){
-        circle = new Circle(10);
+        circle = new Circle(50);
         circle.setLayoutX(75);
         circle.setLayoutY(273);
-        Sphere Ted = new Sphere(circle, 100);
+        Ted = new Sphere(circle, 100);
         removeFromPane(rec);
         removeFromPane(square);
         addToPane(Ted.getCircle());
-        
-        
+        cube.setDisable(false);
+        rectangularPrism.setDisable(false);
+        sphere.setDisable(true);  
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-      
-        
-        
-   
+
+        new AnimationTimer(){
+            @Override
+            public void handle(long now) {
+                // Drag & drop
+                
+                // Get input
+                double massVal = 0;
+                double volVal = 0;
+                double massLiq = 0;
+                double objectDensity;
+                double liquidDensity = 1;
+                double floatingPercentage;
+                double densityRatio;
+                double Archimedes;
+                boolean floating = false;
+                
+                try {
+                    massVal = Double.parseDouble(objectMass.getText()); 
+                    volVal = Double.parseDouble(objectMass.getText());
+                    massLiq = Double.parseDouble(objectMass.getText());
+
+                } catch (Exception e) {
+                    //System.out.println("error in parsing");
+                }
+                
+                if (rectangularPrism.isDisable()){
+                   Gary.setVolume(volVal); 
+                   Gary.setMass(massVal);
+                   
+                   //System.out.print("" + Gary.getMass() + " " +  Gary.getVolume());
+                }
+                
+                else if (cube.isDisable()){
+                    Rima.setVolume(volVal);
+                    Rima.setMass(massVal);
+                   // System.out.print("" + Rima.getMass() + Rima.getVolume());
+                    
+                }
+                
+                else if (sphere.isDisable()){
+                    Ted.setVolume(volVal);
+                    Ted.setVolume(massVal);
+                   // System.out.print("" + Ted.getMass() + Ted.getVolume());
+                }                                             
+                // Do calculations
+                objectDensity = massVal/volVal;
+                liquidDensity = massLiq;
+                densityRatio= objectDensity/liquidDensity;
+                
+                //do Archimedes
+                
+                
+                
+                // Output: if(in water), then water changes
+                if (objectDensity < liquidDensity){
+                    floatingPercentage = 0;
+                    densityRatio = 0;
+                    Archimedes = 0;
+                    
+    
+                    
+                }
+                
+                
+            }
+        }.start();
+
+
        
-       
-        
-        
-       
-    }    
+    }  
+                
     
 }

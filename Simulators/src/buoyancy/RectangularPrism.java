@@ -15,6 +15,7 @@ public class RectangularPrism {
     
     private Rectangle RectangularPrism;
     private double volume;
+    private double mass;
     private double height;
     private double width;
     
@@ -45,6 +46,10 @@ public class RectangularPrism {
         this.volume = volume;
     }
     
+    public void setMass(double mass){
+        this.mass = mass;
+    }
+    
     public void setLayoutY(double y){
         RectangularPrism.setLayoutY(y);
     }
@@ -59,5 +64,9 @@ public class RectangularPrism {
     
     public double getVolume(){
         return volume;
+    }
+    
+    public double getMass(){
+        return mass;
     }
 }

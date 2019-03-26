@@ -12,21 +12,26 @@ import sun.net.www.content.audio.x_aiff;
  *
  * @author cstuser
  */
-public class Cube {
+public class Cubee {
     
     private Rectangle cube;
+    private double mass;
     private double volume;
     private double height;
     private double width;
   
     
-     public Cube(Rectangle cu, double volume) {
+     public Cubee(Rectangle cu, double volume) {
         cube = cu;
         this.volume = volume;  
         height = Math.cbrt(volume);
         width = Math.cbrt(volume);       
         
      }   
+     
+     public Cubee(Rectangle cu){
+         this(cu, 100);
+     }
         
      public Rectangle getCube(){
          return cube;
@@ -34,6 +39,14 @@ public class Cube {
 
     public void setX(double x) {
         cube.setX(x);
+    }
+    
+    public void setVolume(double volume){
+        this.volume = volume;
+    }
+    
+    public void setMass(double mass){
+        this.mass = mass;
     }
 
     public void setY(double y) {
@@ -46,6 +59,14 @@ public class Cube {
 
     public double getY() {
         return cube.getY();
+    }
+    
+    public double getVolume(){
+        return volume;
+    }
+    
+    public double getMass(){
+        return mass;
     }
     
 }
