@@ -109,9 +109,6 @@ public class FXMLDocumentController implements Initializable {
     private Button cancelButton;
 
     @FXML
-    private Button quitButton;
-
-    @FXML
     private Circle focalOne;
 
     @FXML
@@ -252,7 +249,7 @@ public class FXMLDocumentController implements Initializable {
                     + "As the focal length grows,\n"
                     + " they will move further away\n"
                     + " from the lens, vice versa");
-            helpLens.setText("Converging lens centers the \n"
+            helpLens.setText("Convergent lens centers the \n"
                     + "line rays that are going \n"
                     + "through. It becomes thinner \n"
                     + "as the curvature radius increases, \n"
@@ -264,7 +261,7 @@ public class FXMLDocumentController implements Initializable {
                     + "the object becomes bigger, \n"
                     + "vice versa");
             if (imagePosition > 0) {
-                helpImage.setText("In converging lens optics, when the \n"
+                helpImage.setText("In convergent lens optics, when the \n"
                         + "object position is further than the focal \n"
                         + "length, a real and inverted image is \n"
                         + "formed. In which case the image position is \n"
@@ -272,7 +269,7 @@ public class FXMLDocumentController implements Initializable {
                         + "the lens), the magnification is negative \n"
                         + "(the image is inverted)");
             } else {
-                helpImage.setText("In converging lens optics, when the \n"
+                helpImage.setText("In convergent lens optics, when the \n"
                         + "object position is less than the focal \n"
                         + "length, a virtual and upright image is \n"
                         + "formed. In which case the image position is \n"
@@ -280,7 +277,7 @@ public class FXMLDocumentController implements Initializable {
                         + "the lens), the magnification is positive \n"
                         + "(the image is upright)");
             }
-            helpPrinciple.setText("In converging lens optics. there are \n"
+            helpPrinciple.setText("In convergent lens optics, there are \n"
                     + "three principle rays formed, the point where \n"
                     + "they intersect is the tip of the image formed. \n"
                     + "In the simulation, the solid black lines are \n"
@@ -305,12 +302,6 @@ public class FXMLDocumentController implements Initializable {
         // remove help informations
         clearInfo();
     }
-
-    @FXML
-    private void quitButtonAction(ActionEvent event) {
-
-    }
-
 
     /*
     // This method creates a rectangle on the anchorpane and fill up it with the lens image
