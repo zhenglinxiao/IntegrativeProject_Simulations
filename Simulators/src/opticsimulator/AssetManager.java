@@ -25,6 +25,7 @@ public class AssetManager {
     static private ImagePattern candleImage = null;
     static private ImagePattern lensImage = null;
     static private ImagePattern invertedCandle = null;
+    static private ImagePattern uprightCandle = null;
     
     static private String fileURL(String relativePath)
     {
@@ -44,6 +45,7 @@ public class AssetManager {
         candleImage = new ImagePattern(new Image(fileURL("./assets/images/candleTransparent.png")));
         lensImage = new ImagePattern(new Image(fileURL("./assets/images/convergingLens.png")));
         invertedCandle = new ImagePattern(new Image(fileURL("./assets/images/invertedCandle.png")));
+        uprightCandle = new ImagePattern(new Image(fileURL("./assets/images/uprightCandle.png")));
     }
     
     static public Background getBackgroundImage(){
@@ -60,5 +62,9 @@ public class AssetManager {
      
      static public ImagePattern getInvertedCandleImage(){
          return invertedCandle;
+     }
+     
+     static public ImagePattern getUprightCandleImage(){
+         return uprightCandle;
      }
 }
