@@ -166,6 +166,14 @@ public class PDController implements Initializable {
     private Button restart;
     
     @FXML
+    private Button infoButton;
+    
+    @FXML
+    private void switchToInfo(ActionEvent event){
+        // TODO
+    }
+    
+    @FXML
     private void presetRadioButton(ActionEvent event){
         selectPreset.setDisable(false);
         dataBox.setDisable(true);

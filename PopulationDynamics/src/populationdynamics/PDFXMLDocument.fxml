@@ -70,14 +70,14 @@
             <Font name="Copperplate Gothic Bold" size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="875.0" layoutY="500.0" prefHeight="77.0" prefWidth="179.0" spacing="8.0">
+      <VBox layoutX="849.0" layoutY="500.0" prefHeight="77.0" prefWidth="179.0" spacing="8.0">
          <children>
             <Label text="Intrinsic rate of natural increase:" />
             <Label text="Net reproductive rate:" />
             <Label text="Mean generation time:" />
          </children>
       </VBox>
-      <VBox layoutX="1054.0" layoutY="500.0" prefHeight="77.0" prefWidth="43.0" spacing="8.0">
+      <VBox layoutX="1028.0" layoutY="500.0" prefHeight="77.0" prefWidth="43.0" spacing="8.0">
          <children>
             <Label fx:id="intrinsicRate" />
             <Label fx:id="netRepRate" />
@@ -101,5 +101,6 @@
         </yAxis>
       </LineChart>
       <Label fx:id="hexTimeStep" layoutX="1124.0" layoutY="39.0" text="Year" />
+      <Button fx:id="infoButton" layoutX="1136.0" layoutY="546.0" mnemonicParsing="false" onAction="#switchToInfo" text="Info" />
    </children>
 </AnchorPane>
