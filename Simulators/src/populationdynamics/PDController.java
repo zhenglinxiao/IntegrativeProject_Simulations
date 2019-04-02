@@ -217,7 +217,7 @@ public class PDController implements Initializable {
                     offspring.setMax(15); break;
             case 3: lifespan.setMin(1);lifespan.setMax(20);
                     offspring.setMin(50); offspring.setMax(500); break;
-            default: System.out.println("bounds switch"); break;
+            default: System.out.println("PDController 220");break;
         }
     }
     
@@ -235,10 +235,21 @@ public class PDController implements Initializable {
         // Output data
         name = "";
         if(!isPreset){
+            if(survivorshipType.getValue() == null){
+                survivorshipType.setValue("Type 1");
+            }
             PDUtils.setData((int)lifespan.getValue(), (int)offspring.getValue(), determineType((String)survivorshipType.getValue()));
-            name = speciesName.getText();
+            if(speciesName.getText().isEmpty()){
+                name = "Species #" + (int)(Math.random() * 50);
+            }
+            else{
+                name = speciesName.getText();
+            }
         }
         else{
+            if(selectPreset.getValue() == null){
+                selectPreset.setValue("Dog");
+            }
             name = (String)selectPreset.getValue();
             AnimalPreset species = presetList.get(presetList.indexOf(new AnimalPreset(name, 0, 0, 0, 0, 0)));
             PDUtils.setData(species.getLifespan(), species.getOffspring(), species.getType());
@@ -258,14 +269,14 @@ public class PDController implements Initializable {
         netRepRate.setText(twoDecimals.format(PDUtils.getNetRepRate()));
         meanGenTime.setText(twoDecimals.format(PDUtils.getMeanGenTime()));        
         
-        survivorship.setTitle(name + "'s survivorship curve"); 
+        survivorship.setTitle("Survivorship curve of " + name); 
         Series s = new Series();
         for(int i = 0; i < PDUtils.getSurvivorshipCurve().length; i++){
             s.getData().add(new Data(i, PDUtils.getSurvivorshipCurve()[i]));
         }
         survivorship.getData().add(s);
 
-        popVsTime.setTitle(name + "'s population per year"); 
+        popVsTime.setTitle("Population per year of " + name); 
         popVsTime.getData().add(pop);
         popVsTime.setLegendVisible(false);
         timer.start();       
@@ -306,7 +317,7 @@ public class PDController implements Initializable {
             case "Type 1": returnValue = 1; break;
             case "Type 2": returnValue = 2; break;
             case "Type 3": returnValue = 3; break;
-            default: System.out.println("determine type switch");
+            default: System.out.println("PDController 308"); break;
         }
         return returnValue;
     }
@@ -366,10 +377,10 @@ public class PDController implements Initializable {
         }); 
 
         // Graphs
-        survivorship.getXAxis().setLabel("time (years)");
-        survivorship.getYAxis().setLabel("surviving percentage of population (%)");
+        survivorship.getXAxis().setLabel("time (yrs)");
+        survivorship.getYAxis().setLabel("% surviving population");
         
-        popVsTime.getXAxis().setLabel("time (years)");
+        popVsTime.getXAxis().setLabel("time (yrs)");
         popVsTime.getYAxis().setLabel("population");
         
         // Create HexGrid

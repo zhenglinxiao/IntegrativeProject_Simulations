@@ -45,7 +45,7 @@
                   <Label prefWidth="169.0" text="Enter the initial population: " />
                   <Slider fx:id="initialPop" majorTickUnit="1.0" max="200.0" min="1.0" minorTickCount="0" snapToTicks="true" value="1.0" />
                   <Label text="Enter the carrying capacity of the area:" />
-                  <Slider fx:id="capacity" majorTickUnit="100.0" max="2000.0" min="1.0" minorTickCount="0" snapToTicks="true" value="1.0" />
+                  <Slider fx:id="capacity" majorTickUnit="100.0" max="2000.0" min="200.0" minorTickCount="0" snapToTicks="true" value="200.0" />
                </children>
             </VBox>
             <Label fx:id="lifespanLabel" layoutX="265.0" layoutY="266.0" />
