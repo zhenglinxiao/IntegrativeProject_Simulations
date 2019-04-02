@@ -25,8 +25,7 @@ public class Sphere {
         circle = c;
         this.volume = volume;
         radius = Math.cbrt((3*volume)/4*Math.PI);
-        //c.getCenterX();
-        //c.getCenterY();
+        
         
         
     } public Circle getCircle(){
@@ -48,6 +47,10 @@ public class Sphere {
     
     public void setMass(double mass){
         this.mass = mass;
+    }
+    
+    public double getRadius(){
+        return getRadius();
     }
     
     public double getSphereX(){

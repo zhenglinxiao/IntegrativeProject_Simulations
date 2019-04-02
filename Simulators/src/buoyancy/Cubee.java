@@ -25,20 +25,25 @@ public class Cubee {
         cube = cu;
         this.volume = volume;  
         height = Math.cbrt(volume);
-        width = Math.cbrt(volume);       
+        width = Math.cbrt(volume);  
+        cube.getLayoutX();
+        cube.getLayoutY();
+        
         
      }   
      
      public Cubee(Rectangle cu){
          this(cu, 100);
+         cube.getLayoutX();
+         cube.getLayoutY();
      }
         
      public Rectangle getCube(){
          return cube;
      }
 
-    public void setX(double x) {
-        cube.setX(x);
+    public void setLayoutX(double x) {
+        cube.setLayoutX(x);
     }
     
     public void setVolume(double volume){
@@ -49,16 +54,16 @@ public class Cubee {
         this.mass = mass;
     }
 
-    public void setY(double y) {
-       cube.setY(y);
+    public void setLayoutY(double y) {
+       cube.setLayoutY(y);
     }
 
-    public double getX() {
-        return cube.getX();
+    public double getLayoutX() {
+        return cube.getLayoutX();
     }
 
-    public double getY() {
-        return cube.getY();
+    public double getLayoutY() {
+        return cube.getLayoutY();
     }
     
     public double getVolume(){
