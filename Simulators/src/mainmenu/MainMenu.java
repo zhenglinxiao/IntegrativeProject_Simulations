@@ -1,6 +1,7 @@
 
 package mainmenu;
 
+import com.sun.scenario.effect.impl.Renderer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +19,7 @@ public class MainMenu extends Application {
         Parent mainMenu = FXMLLoader.load(getClass().getResource("MainMenuFXML.fxml"));
         
         Scene scene = new Scene(mainMenu);
-        
+        mainMenu.requestFocus();
         stage.setScene(scene);
         stage.setTitle("Main Menu");
         stage.show();
