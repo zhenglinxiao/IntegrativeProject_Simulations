@@ -71,7 +71,7 @@
          </font></Label>
       <Line fx:id="groundLine" endX="600.0" layoutX="600.0" layoutY="440.0" startX="-600.0" strokeLineCap="ROUND" strokeMiterLimit="15.0" strokeWidth="5.0" />
       <Circle fx:id="focalOne" fill="DODGERBLUE" layoutX="402.0" layoutY="440.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="focalTwo" fill="#1fff44" layoutX="721.0" layoutY="440.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="focalTwo" fill="DODGERBLUE" layoutX="721.0" layoutY="440.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="indexLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1212.0" layoutY="315.0" prefHeight="34.0" prefWidth="316.0" textFill="#17e279" />
       <Label fx:id="radiusLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1212.0" layoutY="409.0" prefHeight="34.0" prefWidth="316.0" textFill="#17e279" />
       <Label fx:id="objectPositionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1212.0" layoutY="498.0" prefHeight="34.0" prefWidth="316.0" textFill="#17e279" />
@@ -120,5 +120,6 @@
             <Font name="Ink Free" size="16.0" />
          </font>
       </Label>
+      <ComboBox fx:id="pickPicture" layoutX="1376.0" layoutY="231.0" prefWidth="150.0" />
     </children>
 </AnchorPane>

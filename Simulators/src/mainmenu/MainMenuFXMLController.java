@@ -4,7 +4,6 @@ package mainmenu;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +13,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -23,6 +25,8 @@ import javafx.stage.WindowEvent;
  * @author Lin Xiao Zheng, Yutong Yang & Gary Zhang
  */
 public class MainMenuFXMLController implements Initializable {
+    @FXML
+    private AnchorPane pane;
     
     @FXML
     private Button opticsButton;
@@ -34,15 +38,25 @@ public class MainMenuFXMLController implements Initializable {
     private Button popButton;
     
     @FXML
+    private Label title;
+    
+    @FXML 
+    private Label info;
+    
+    @FXML
     private void startOptics(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("/opticsimulator/FXMLDocument.fxml"));
         
+        //Scene is the content inside the pane
+        //Stage is the window (pane)
         Scene simScene = new Scene(root);
         Stage simWindow = new Stage();
-        
+        root.requestFocus();
+        // get the menuWindow from the button pressed
         Stage menuWindow = (Stage)((Node)(event.getSource())).getScene().getWindow();
         menuWindow.close();
         
+        // once the simulation window is closed, open the main window
         simWindow.setOnCloseRequest(new EventHandler<WindowEvent>(){
             @Override
             public void handle(WindowEvent e){
@@ -50,8 +64,7 @@ public class MainMenuFXMLController implements Initializable {
             }
         });
         
-        simWindow.setTitle("");
-        // simWindow.getIcons().add(new Image("file extension"));
+        simWindow.setTitle("Geometrical Optics Simulator");
         simWindow.setScene(simScene);
         simWindow.show();
     }
@@ -89,7 +102,11 @@ public class MainMenuFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        mainmenu.AssetManager.preloadAllAssets();
+        
+        // set the background for the mainWindow
+        pane.setBackground(AssetManager.getBackgroundImage());
+
     }    
     
 }
