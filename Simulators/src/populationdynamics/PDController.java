@@ -1,6 +1,7 @@
 
 package populationdynamics;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -11,8 +12,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
@@ -26,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.stage.Stage;
 
 /**
  *
@@ -45,6 +50,7 @@ public class PDController implements Initializable {
     int hexIndex = 0;
     double popRemainder = 0;
     double lastPopulation = 0;
+    String name;
     ArrayList<AnimalPreset> presetList = new ArrayList();
     
     private void resetTimer(){
@@ -73,11 +79,13 @@ public class PDController implements Initializable {
      
                 
                 // HexGrid update
-                hexTimeStep.setText("Year " + timeStep);
                 double popPerHex = capacity.getValue() / hexGrid.size();
                 double popIncrease = population - lastPopulation;
                 int hexUsed = (int)((popIncrease + popRemainder) / popPerHex);
                 popRemainder = (popIncrease + popRemainder) - hexUsed * popPerHex;
+                
+                hexTimeStep.setText("Year " + timeStep);
+                hexEquals.setText("1 hex ~ " + integer.format(popPerHex) + " " +  name + "s");
                 
                 for(int i = 0; i < hexUsed; i++){
                     hexGrid.get(hexIndex).setFill(Color.AQUA);
@@ -160,17 +168,28 @@ public class PDController implements Initializable {
     private Label initialPopLabel;
     
     @FXML
+    private Label hexEquals;
+    
+    @FXML
     private Button start;
     
     @FXML
     private Button restart;
     
     @FXML
-    private Button infoButton;
+    private Button helpButton;
     
     @FXML
-    private void switchToInfo(ActionEvent event){
-        // TODO
+    private void switchToHelp(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("UDFXML.fxml"));
+        
+        Scene help = new Scene(root);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setTitle("Population Dynamics Simulator - Help");
+//        window.getIcons().add(new Image("file:./assets/images/Basic_Alien.png"));
+        window.setScene(help);
+        window.show();
     }
     
     @FXML
@@ -214,7 +233,7 @@ public class PDController implements Initializable {
         optionsBox.setDisable(true);
         
         // Output data
-        String name = "";
+        name = "";
         if(!isPreset){
             PDUtils.setData((int)lifespan.getValue(), (int)offspring.getValue(), determineType((String)survivorshipType.getValue()));
             name = speciesName.getText();
