@@ -433,7 +433,6 @@ public class FXMLDocumentController implements Initializable {
         double radius = radiusSlider.getValue() / 100;
         // calls the focalLength method from the equation class and bring the index and radius as the parameters
         focalLength = e.focalLength(index, radius);
-        System.out.print("Hello world");
 
         // set the X coordinates of focal point one and focal point two
         // focal point one is on the left side of the lens
