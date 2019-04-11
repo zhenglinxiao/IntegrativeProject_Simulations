@@ -1,7 +1,6 @@
 
 package mainmenu;
 
-import com.sun.scenario.effect.impl.Renderer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,14 +22,6 @@ public class MainMenu extends Application {
         stage.setScene(scene);
         stage.setTitle("Main Menu");
         stage.show();
-        
-//        Parent root = FXMLLoader.load(getClass().getResource("PDFXMLDocument.fxml"));
-//        
-//        Scene scene = new Scene(root);
-//        
-//        stage.setScene(scene);
-//        stage.setTitle("Population Dynamics Simulator");
-//        stage.show();
     }
 
     /**

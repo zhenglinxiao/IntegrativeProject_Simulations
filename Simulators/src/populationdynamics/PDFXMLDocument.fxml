@@ -38,12 +38,12 @@
                   <TextField fx:id="speciesName" maxWidth="150.0" prefHeight="25.0" prefWidth="100.0" />
                   <Label text="Select a survivorship curve type:" />
                   <ComboBox fx:id="survivorshipType" onAction="#bounds" prefWidth="150.0" promptText="Select..." />
-                  <Label text="Enter the lifespan of species:" />
+                  <Label text="Enter the lifespan of species (years):" />
                   <Slider fx:id="lifespan" majorTickUnit="1.0" min="1.0" minorTickCount="0" snapToTicks="true" value="1.0" />
                   <Label text="Enter the average number of offspring:" />
                   <Slider fx:id="offspring" majorTickUnit="1.0" min="1.0" minorTickCount="0" snapToTicks="true" value="1.0" />
                   <Label prefWidth="169.0" text="Enter the initial population: " />
-                  <Slider fx:id="initialPop" majorTickUnit="1.0" max="200.0" min="1.0" minorTickCount="0" snapToTicks="true" value="1.0" />
+                  <Slider fx:id="initialPop" majorTickUnit="1.0" max="200.0" min="10.0" minorTickCount="0" snapToTicks="true" value="10.0" />
                   <Label text="Enter the carrying capacity of the area:" />
                   <Slider fx:id="capacity" majorTickUnit="100.0" max="2000.0" min="200.0" minorTickCount="0" snapToTicks="true" value="200.0" />
                </children>
@@ -84,7 +84,7 @@
             <Label fx:id="meanGenTime" />
          </children>
       </VBox>
-      <LineChart fx:id="survivorship" layoutX="328.0" layoutY="23.0" legendVisible="false" prefHeight="272.0" prefWidth="417.0" title="Survivorship Curve">
+      <LineChart fx:id="survivorship" animated="false" layoutX="328.0" layoutY="23.0" legendVisible="false" prefHeight="272.0" prefWidth="417.0" title="Survivorship Curve">
         <xAxis>
           <NumberAxis side="BOTTOM" />
         </xAxis>

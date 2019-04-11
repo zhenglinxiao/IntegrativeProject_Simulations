@@ -22,6 +22,8 @@ public class Hexagon {
         width = 2 * side;
         height = sqrt(3) * side;
         halfHeight = height / 2;
+        center[0] = x;
+        center[1] = y;        
 
         //     X                                   Y
         points[0] = x - side / 2;           points[1] = y - halfHeight;
@@ -88,8 +90,8 @@ public class Hexagon {
             }
         }
         
-        center[0] += x;
-        center[1] += y;
+//        center[0] += x;
+//        center[1] += y;
     }
 
     @Override
