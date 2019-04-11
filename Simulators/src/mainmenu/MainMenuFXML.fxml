@@ -25,14 +25,14 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Label fx:id="info" alignment="CENTER" layoutX="166.0" layoutY="275.0" prefHeight="52.0" prefWidth="549.0" text="Click one of the following button to discover the joy of Science!" textFill="#e17a25">
+      <Label fx:id="info" alignment="CENTER" layoutX="166.0" layoutY="294.0" prefHeight="52.0" prefWidth="549.0" text="CHOOSE A SIMULATOR!" textAlignment="CENTER" textFill="#d3d3d3">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="19.0" />
+            <Font name="Monospaced Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="69.0" prefHeight="97.0" prefWidth="607.0" text="Various Scientific Phenomena Simulator" textFill="#d13256">
+      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="69.0" prefHeight="97.0" prefWidth="607.0" text="Various Scientific Phenomena Simulators">
          <font>
-            <Font name="Bauhaus 93" size="34.0" />
+            <Font name="Impact" size="34.0" />
          </font>
       </Label>
    </children>

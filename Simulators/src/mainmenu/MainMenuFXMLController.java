@@ -70,8 +70,26 @@ public class MainMenuFXMLController implements Initializable {
     }
     
     @FXML
-    private void startFloat(ActionEvent event){
-        // GRAY
+    private void startFloat(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/buoyancy/FXMLDocument.fxml"));
+        
+        Scene simScene = new Scene(root);
+        Stage simWindow = new Stage();
+        
+        Stage menuWindow = (Stage)((Node)(event.getSource())).getScene().getWindow();
+        menuWindow.close();
+        
+        simWindow.setOnCloseRequest(new EventHandler<WindowEvent>(){
+            @Override
+            public void handle(WindowEvent e){
+                menuWindow.show();
+            }
+        });
+        
+        simWindow.setTitle("");
+        // simWindow.getIcons().add(new Image("file extension"));
+        simWindow.setScene(simScene);
+        simWindow.show();
     }
     
     @FXML

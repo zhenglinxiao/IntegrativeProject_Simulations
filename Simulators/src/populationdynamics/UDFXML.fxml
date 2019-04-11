@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="populationdynamics.UDFXMLController">
+   <tabs>
+      <Tab closable="false" text="General">
+         <content>
+            <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: FFFFFF;">
+               <children>
+                  <Button layoutX="1145.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" text="Back" />
+                  <Label layoutX="80.0" layoutY="61.0" text="What is population dynamics?">
+                     <font>
+                        <Font name="Britannic Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="76.0" layoutY="181.0" text="What does this application do?">
+                     <font>
+                        <Font name="Britannic Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="79.0" layoutY="396.0" text="How to use this application">
+                     <font>
+                        <Font name="Britannic Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="95.0" layoutY="84.0" prefHeight="65.0" prefWidth="583.0" text="It is the study of the evolution of populations and of the processes which affect it. This includes studying the growth, decline, and age of populations." wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label layoutX="95.0" layoutY="205.0" prefHeight="165.0" prefWidth="661.0" text="It simulates population growth by using user inputs about a certain population. Keep in mind that this simulation is a rough estimate. You can see that the data is calculated in intervals of a year, which makes it less precise. Plus, in nature, there are many more factors that influence population growth, one would need to input a whole life table to get a precise result for a given population. This application is an educational tool that simplifies the concept of population growth to help users understand how it works." wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label layoutX="92.0" layoutY="419.0" prefHeight="91.0" prefWidth="680.0" text="The left side of the application is where you can enter your inputs. Click on “Start simulation” when you’re set, sit back, and watch the graphs grow. If you want to try again, click on “Restart simulation” to enter new data. Exit the application to return to the Main Menu." wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <ImageView fitHeight="299.0" fitWidth="346.0" layoutX="799.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/popDyn.PNG" />
+                     </image>
+                  </ImageView>
+               </children></AnchorPane>
+         </content>
+      </Tab>
+      <Tab closable="false" text="Input">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: ffffff;">
+               <children>
+                  <Label layoutX="60.0" layoutY="74.0" text="Presets">
+                     <font>
+                        <Font name="Britannic Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="60.0" layoutY="221.0" text="Create your own">
+                     <font>
+                        <Font name="Britannic Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="1145.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" text="Back" />
+                  <Label layoutX="75.0" layoutY="97.0" prefHeight="71.0" prefWidth="823.0" text="Presets have been created using data found online in order to test the application. The default preset is &quot;Human&quot;. The input section from the &quot;Creation&quot; part displays the data about a selected preset once the simulation starts." wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <VBox layoutX="75.0" layoutY="258.0" prefHeight="163.0" prefWidth="781.0">
+                     <children>
+                        <Label prefHeight="26.0" text="1. Name your species - defaults to &quot;Species #&quot; followed by a randomly generated number.">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                        <Label prefHeight="26.0" text="2. Choose a survivorship type - defaults to &quot;Type 1&quot; - check &quot;Output &amp; Theory&quot; for more information.">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                        <Label prefHeight="26.0" text="3. Enter the lifespan of the species in years.">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                        <Label prefHeight="26.0" text="4. Enter the number of offspring a female can have at once - check &quot;Output &amp; Theory&quot; for more information.">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                        <Label prefHeight="26.0" text="5. Enter the initial population.">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                        <Label prefHeight="26.0" text="6. Enter the carrying capacity - the maximum number of individuals that the territory can handle.">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+        </content>
+      </Tab>
+      <Tab closable="false" text="Output &amp; Theory">
+        <content>
+            <ScrollPane>
+               <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1505.0" prefWidth="1186.0" style="-fx-background-color: ffffff;">
+                     <children>
+                        <Button layoutX="1132.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" text="Back" />
+                        <Label layoutX="64.0" layoutY="39.0" text="Logistic Model">
+                           <font>
+                              <Font name="Britannic Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="83.0" layoutY="466.0" text="Intrinsic Rate of Natural Increase">
+                           <font>
+                              <Font name="Britannic Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="83.0" layoutY="771.0" text="Survivorship Types &amp; Life Tables">
+                           <font>
+                              <Font name="Britannic Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="95.0" layoutY="62.0" prefHeight="83.0" prefWidth="760.0" text="The logistic function has an “S” shape. Contrary to the exponential model, the logistic model takes in account the fact that a territory can only contain a certain number of individuals. This is determined by factors such as land resources. That maximum number is called the carrying capacity K. " wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="120.0" layoutY="500.0" prefHeight="102.0" prefWidth="980.0" text="In this simulation, the intrinsic rate of natural increase is calculated using the net reproductive rate and the mean generation time. The intrinsic rate of natural increase “r” can be seen as the difference between the number of births and the number of deaths at each time step, although it is a bit more complicated than that. The net reproductive rate Ro represents the number of (female) offspring a female will have in her lifetime. The mean generation time T represents the interval between the birth of a specimen and the birth of its offspring. " wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="107.0" layoutY="800.0" prefHeight="152.0" prefWidth="969.0" text="The survivorship curve represents the surviving percentage of a population according to their age. There exist three types of survivorship curves. Type 1 represents species which have a low death rate through most of their lifetime. These species tend to die of old age in nature, so they produce less offspring. Most big mammals fit into this type. Type 2 species, like most birds, have a constant rate of death throughout their lifetime. This means that they are as likely to die at an early age as they are at an older age. Finally, Type 3 species, like small fish, are very likely to die at birth which is why they produce a large number of offspring. I have adjusted the bounds for lifetime and offspring to reflect each survivorship type. " wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="106.0" layoutY="952.0" prefHeight="55.0" prefWidth="942.0" text="Survivorship curves and the number of offspring per female at a certain age are usually obtained from life tables. However, I didn’t want to make users input full improvised life tables, which is why I decided to simplify the inputs and estimate the results. " wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="124.0" fitWidth="289.0" layoutX="613.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logistic%20function.PNG" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="93.0" fitWidth="200.0" layoutX="121.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/netRepRate.PNG" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="122.0" fitWidth="156.0" layoutX="517.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/meanGenTime.PNG" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="93.0" fitWidth="200.0" layoutX="851.0" layoutY="609.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/intrinsicRate.PNG" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="299.0" fitWidth="445.0" layoutX="124.0" layoutY="1084.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/survCurves.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="461.0" fitWidth="496.0" layoutX="613.0" layoutY="1042.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/lifeTable.PNG" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="267.0" fitWidth="283.0" layoutX="239.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logistic.PNG" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+        </content>
+      </Tab>
+      <Tab closable="false" text="Visual">
+        <content>
+          <AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: ffffff;">
+               <children>
+                  <Button layoutX="1145.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" text="Back" />
+                  <Label layoutX="67.0" layoutY="80.0" style="-fx-background-color: ffffff;" text="What are those hexagons?">
+                     <font>
+                        <Font name="Britannic Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="93.0" layoutY="110.0" prefHeight="145.0" prefWidth="512.0" text="The grid of hexagons represent the territory that the species is inhabiting. Below the grid, you can see how many individuals are represented by one hexagon, as well as the year corresponding to the Population vs time graph. The grid updates at the same time as the graph, so the data matches. " wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="93.0" layoutY="243.0" prefHeight="84.0" prefWidth="512.0" text="The grid of hexagons was created using a recursive method. On the right, you can see how the recursion works in more detail." wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="startButton" layoutX="470.0" layoutY="374.0" mnemonicParsing="false" onAction="#startAnimation" text="Start Animation!" />
+                  <Slider fx:id="hexSize" blockIncrement="1.0" layoutX="425.0" layoutY="339.0" majorTickUnit="1.0" max="4.0" min="1.0" minorTickCount="0" orientation="VERTICAL" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+                  <Label layoutX="323.0" layoutY="378.0" text="Choose grid size:" />
+               </children></AnchorPane>
+        </content>
+      </Tab>
+   </tabs>
+</TabPane>
