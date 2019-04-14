@@ -322,7 +322,7 @@ public class PDController implements Initializable {
         return returnValue;
     }
     
-    public void addToPane(Node node) {
+    private void addToPane(Node node) {
         pane.getChildren().add(node);
     }
     

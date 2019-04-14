@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package buoyancy;
 
 import javafx.scene.shape.Rectangle;
 
-/**
- *
- * @author cstuser
- */
 public class RectangularPrism {
     
     private Rectangle RectangularPrism;
@@ -30,9 +22,10 @@ public class RectangularPrism {
     }
     
     public RectangularPrism(Rectangle r){
-        RectangularPrism = r;
+       RectangularPrism = r;
        RectangularPrism.getHeight();
        RectangularPrism.getWidth();
+     
     }
     
     public Rectangle getRectangularPrism(){

@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package buoyancy;
 
 import javafx.scene.shape.Rectangle;
-import sun.net.www.content.audio.x_aiff;
 
-/**
- *
- * @author cstuser
- */
-public class Cubee {
+public class Cube {
     
     private Rectangle cube;
     private double mass;
@@ -21,7 +12,7 @@ public class Cubee {
     private double width;
   
     
-     public Cubee(Rectangle cu, double volume) {
+     public Cube(Rectangle cu, double volume) {
         cube = cu;
         this.volume = volume;  
         height = Math.cbrt(volume);
@@ -32,7 +23,7 @@ public class Cubee {
         
      }   
      
-     public Cubee(Rectangle cu){
+     public Cube(Rectangle cu){
          this(cu, 100);
          cube.getLayoutX();
          cube.getLayoutY();
