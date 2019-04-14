@@ -1,6 +1,3 @@
-/*
- * Change hex fill
- */
 package populationdynamics;
 
 import java.util.ArrayList;
@@ -30,16 +27,6 @@ public class HexGrid {
            4
          5   6
            7
-    
-    In relation to center (4)
-            X           Y          Axial Coordinates
-    1:      0          -h               (0, -1)
-    2:   -w * 3/4      -hh              (-1, 0)
-    3:   +w * 3/4      -hh              (+1, -1)
-    4:      0           0               (0, 0)
-    5:   -w * 3/4      +hh              (-1, +1)
-    6:   +w * 3/4      +hh              (+1, 0)
-    7:      0          +h               (0, +1)
     */
     
     public HexGrid(Hexagon centerHex, int gridSize){
@@ -82,12 +69,12 @@ public class HexGrid {
                     default: System.out.println("axials switch error 3"); break;
                 }
 
-                Hexagon temp = new Hexagon(hexSide, x, y);
-                temp.setCoordinates(c[0] + centerCoor[0], c[1] + centerCoor[1]);
+                Hexagon lastHex = new Hexagon(hexSide, x, y);
+                lastHex.setCoordinates(c[0] + centerCoor[0], c[1] + centerCoor[1]);
                                 
-                if(!grid.contains(temp)){
-                    grid.add(temp);
-                    createGrid(temp);
+                if(!grid.contains(lastHex)){
+                    grid.add(lastHex);
+                    createGrid(lastHex);
                 }
             }
         }

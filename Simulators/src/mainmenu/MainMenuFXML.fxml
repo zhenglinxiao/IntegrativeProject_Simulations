@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.paint.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="495.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainmenu.MainMenuFXMLController">
+<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="495.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainmenu.MainMenuFXMLController">
    <children>
       <Button fx:id="opticsButton" layoutX="115.0" layoutY="362.0" mnemonicParsing="false" onAction="#startOptics" prefHeight="52.0" prefWidth="171.0" text="Geometrical Optics">
          <font>
@@ -25,14 +19,14 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Label fx:id="info" alignment="CENTER" layoutX="166.0" layoutY="275.0" prefHeight="52.0" prefWidth="549.0" text="Click one of the following button to discover the joy of Science!" textFill="#e17a25">
+      <Label fx:id="info" alignment="CENTER" layoutX="166.0" layoutY="294.0" prefHeight="52.0" prefWidth="549.0" text="CHOOSE A SIMULATOR!" textAlignment="CENTER" textFill="#d3d3d3">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="19.0" />
+            <Font name="Monospaced Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="69.0" prefHeight="97.0" prefWidth="607.0" text="Various Scientific Phenomena Simulator" textFill="#d13256">
+      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="69.0" prefHeight="97.0" prefWidth="607.0" style="-fx-background-color: white;" text="Various Scientific Phenomena Simulators">
          <font>
-            <Font name="Bauhaus 93" size="34.0" />
+            <Font name="Serif Bold" size="30.0" />
          </font>
       </Label>
    </children>
