@@ -24,9 +24,9 @@
             <Font name="Monospaced Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="69.0" prefHeight="97.0" prefWidth="607.0" text="Various Scientific Phenomena Simulators">
+      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="69.0" prefHeight="97.0" prefWidth="607.0" style="-fx-background-color: white;" text="Various Scientific Phenomena Simulators">
          <font>
-            <Font name="Impact" size="34.0" />
+            <Font name="Serif Bold" size="30.0" />
          </font>
       </Label>
    </children>
