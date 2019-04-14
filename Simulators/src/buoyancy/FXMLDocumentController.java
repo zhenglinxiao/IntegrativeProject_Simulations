@@ -34,9 +34,6 @@ public class FXMLDocumentController implements Initializable {
     private Button sphere;
 
     @FXML
-    private Label waterLevel;
-
-    @FXML
     private Label percentage;
 
     @FXML
@@ -101,8 +98,9 @@ public class FXMLDocumentController implements Initializable {
     private boolean moveShape = false;
     private double lastFrameTime = 0;
     private double timeSinceLastUpdate = 0;
-    private long iniTime = System.nanoTime();
-    private DecimalFormat formatter = new DecimalFormat("#.##");
+    private final long iniTime = System.nanoTime();
+    private final DecimalFormat formatter = new DecimalFormat("#.##");
+    private double maxDim = 150;
 
     private void addToPane(Node node) {
         pane.getChildren().add(node);
@@ -262,30 +260,34 @@ public class FXMLDocumentController implements Initializable {
                                 gravSphere = 1;
 
                             } else if (floating) {
+                                double usedRatio = densityRatio;
+                                if(densityRatio < 0.01){
+                                    usedRatio = 0.01;
+                                }
                                 // Check cube
-                                if (cubeObject.getCube().getLayoutY() == water.getLayoutY() - ((1 - densityRatio) * cubeObject.getCube().getHeight())) {
+                                if (cubeObject.getCube().getLayoutY() == water.getLayoutY() - ((1 - usedRatio) * cubeObject.getCube().getHeight())) {
                                     gravCube = 0;
-                                } else if (cubeObject.getCube().getLayoutY() > water.getLayoutY() - ((1 - densityRatio) * cubeObject.getCube().getHeight())) {
+                                } else if (cubeObject.getCube().getLayoutY() > water.getLayoutY() - ((1 - usedRatio) * cubeObject.getCube().getHeight())) {
                                     gravCube = -1;
-                                } else if (cubeObject.getCube().getLayoutY() < water.getLayoutY() - ((1 - densityRatio) * cubeObject.getCube().getHeight())) {
+                                } else if (cubeObject.getCube().getLayoutY() < water.getLayoutY() - ((1 - usedRatio) * cubeObject.getCube().getHeight())) {
                                     gravCube = 1;
                                 }
 
                                 // Check prism
-                                if (prismObject.getRectangularPrism().getLayoutY() == water.getLayoutY() - ((1 - densityRatio) * prismObject.getRectangularPrism().getHeight())) {
+                                if (prismObject.getRectangularPrism().getLayoutY() == water.getLayoutY() - ((1 - usedRatio) * prismObject.getRectangularPrism().getHeight())) {
                                     gravPrism = 0;
-                                } else if (prismObject.getRectangularPrism().getLayoutY() > water.getLayoutY() - ((1 - densityRatio) * prismObject.getRectangularPrism().getHeight())) {
+                                } else if (prismObject.getRectangularPrism().getLayoutY() > water.getLayoutY() - ((1 - usedRatio) * prismObject.getRectangularPrism().getHeight())) {
                                     gravPrism = -1;
-                                } else if (prismObject.getRectangularPrism().getLayoutY() < water.getLayoutY() - ((1 - densityRatio) * prismObject.getRectangularPrism().getHeight())) {
+                                } else if (prismObject.getRectangularPrism().getLayoutY() < water.getLayoutY() - ((1 - usedRatio) * prismObject.getRectangularPrism().getHeight())) {
                                     gravPrism = 1;
                                 }
 
                                 // Check sphere
-                                if (sphereObject.getCircle().getLayoutY() - sphereObject.getCircle().getRadius() == water.getLayoutY() - ((1 - densityRatio) * sphereObject.getCircle().getRadius() * 2)) {
+                                if (sphereObject.getCircle().getLayoutY() - sphereObject.getCircle().getRadius() == water.getLayoutY() - ((1 - usedRatio) * sphereObject.getCircle().getRadius() * 2)) {
                                     gravSphere = 0;
-                                } else if (sphereObject.getCircle().getLayoutY() - sphereObject.getCircle().getRadius() > water.getLayoutY() - ((1 - densityRatio) * sphereObject.getCircle().getRadius() * 2)) {
+                                } else if (sphereObject.getCircle().getLayoutY() - sphereObject.getCircle().getRadius() > water.getLayoutY() - ((1 - usedRatio) * sphereObject.getCircle().getRadius() * 2)) {
                                     gravSphere = -1;
-                                } else if (sphereObject.getCircle().getLayoutY() - sphereObject.getCircle().getRadius() < water.getLayoutY() - ((1 - densityRatio) * sphereObject.getCircle().getRadius() * 2)) {
+                                } else if (sphereObject.getCircle().getLayoutY() - sphereObject.getCircle().getRadius() < water.getLayoutY() - ((1 - usedRatio) * sphereObject.getCircle().getRadius() * 2)) {
                                     gravSphere = 1;
                                 }
                             }
@@ -337,19 +339,23 @@ public class FXMLDocumentController implements Initializable {
                     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                         objVolPrompt.setTextFill(Color.BLACK);
                         try {
-                            cubeObject.getCube().setHeight(Math.cbrt(Double.parseDouble(newValue)) * 20);             //sets the height of the cube
-                            cubeObject.getCube().setWidth(Math.cbrt(Double.parseDouble(newValue)) * 20);              //sets the width of the cube
-
-                            cubeObject.getCube().setLayoutY(323 - cubeObject.getCube().getHeight());                   //makes sure that the cube always stays on the platform
-
-                            prismObject.getRectangularPrism().setHeight(Math.cbrt(Double.parseDouble(newValue)) * 20 / 2);      //sets the height of the rectangular prism
-                            prismObject.getRectangularPrism().setWidth(Math.cbrt(Double.parseDouble(newValue)) * 20);       //sets the width of the rectangular prism
-                            prismObject.getRectangularPrism().setLayoutY(323 - prismObject.getRectangularPrism().getHeight()); //makes sure that the rectangular prism always stays on the platform
-
-                            sphereObject.getCircle().setRadius(Math.cbrt(Double.parseDouble(newValue)) * 20 / 2);  //sets the size of the circle
-                            sphereObject.getCircle().setLayoutY(323 - sphereObject.getCircle().getRadius());                           //makes sure that the circle always stays on the platform
-
                             volVal = Double.parseDouble(newValue);
+
+                            if (Math.cbrt(volVal) * 20 <= maxDim) {
+                                cubeObject.getCube().setHeight(Math.cbrt(volVal) * 20);
+                                cubeObject.getCube().setWidth(Math.cbrt(volVal) * 20);
+                                prismObject.getRectangularPrism().setHeight(Math.cbrt(volVal) * 20 / 2);
+                                prismObject.getRectangularPrism().setWidth(Math.cbrt(volVal) * 20);
+                                sphereObject.getCircle().setRadius(Math.cbrt(volVal) * 20 / 2);
+                            }
+                            else{
+                                cubeObject.getCube().setHeight(maxDim);
+                                cubeObject.getCube().setWidth(maxDim);
+                                prismObject.getRectangularPrism().setHeight(maxDim / 2);
+                                prismObject.getRectangularPrism().setWidth(maxDim);
+                                sphereObject.getCircle().setRadius(maxDim / 2);              
+                            }
+
                         } catch (Exception e) {
                             objVolPrompt.setTextFill(Color.RED);
                         }
