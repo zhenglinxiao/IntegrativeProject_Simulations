@@ -1,22 +1,3 @@
-
-
-
-
-
-
-/*
-VERIFY PRESETS!!!!!!!!
-*/
-
-
-
-
-
-
-
-
-
-
 package populationdynamics;
 
 import java.io.IOException;
@@ -279,7 +260,7 @@ public class PDController implements Initializable {
             }
         } else {
             if (selectPreset.getValue() == null) {
-                selectPreset.setValue("Human");
+                selectPreset.setValue("African Elephant");
             }
             name = (String) selectPreset.getValue();
             AnimalPreset species = presetList.get(presetList.indexOf(new AnimalPreset(name, 0, 0, 0, 0, 0)));
@@ -372,13 +353,9 @@ public class PDController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // ComboBox elements
         presetList.add(new AnimalPreset("Human", 1, 83, 1, 30, 400));
-        presetList.add(new AnimalPreset("Dog", 2, 12, 5, 10, 1000));
+        presetList.add(new AnimalPreset("Penguin", 2, 20, 1, 10, 500));
         presetList.add(new AnimalPreset("African Elephant", 1, 65, 1, 50, 500));
-//        presetList.add(new AnimalPreset("Galapagos Tortoise", 1, 100, 10, 5, 300));
         presetList.add(new AnimalPreset("Rabbit", 2, 2, 6, 10, 800));
-        presetList.add(new AnimalPreset("Lion", 1, 12, 3, 5, 300));
-        presetList.add(new AnimalPreset("Goldfish", 3, 8, 500, 2, 1000));
-        presetList.add(new AnimalPreset("Blue Jay", 2, 7, 5, 2, 200));
 
         ArrayList<String> animalList = new ArrayList();
         for (AnimalPreset p : presetList) {

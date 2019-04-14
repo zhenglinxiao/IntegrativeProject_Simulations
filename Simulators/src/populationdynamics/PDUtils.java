@@ -22,26 +22,29 @@ public class PDUtils {
                 for(int i = 0; i < survivorshipCurve.length; i++){
                     survivorshipCurve[i] = -Math.exp((Math.log(101f) / lifespan) * i) + 101f;  
                 }
-                offspringConstant = 0.05;
+                offspringConstant = 0.25;
                 break;
             case 2:
                 for(int i = 0; i < survivorshipCurve.length; i++){
                     survivorshipCurve[i] = -(100f / lifespan) * i + 100f;
                 }
-                offspringConstant = 0.2;
+                offspringConstant = 0.8;
                 break;          
             case 3:
                 for(int i = 0; i < survivorshipCurve.length; i++){
                     survivorshipCurve[i] = 13 * (- Math.log(i) + Math.log(lifespan));
                 }
                 survivorshipCurve[0] = 100; 
-                offspringConstant = 0.4;
+                offspringConstant = 0.8;
                 break;
             default: System.out.println("survivorship switch"); break;
         }
         
         for(int k = (int) sexMaturity * lifespan; k < offspringPerAge.length; k++){
-            offspringPerAge[k] = -1.0 / (9.0 * lifespan) * (k - 2.0 * lifespan / 3.0) + offspringConstant * numOffspring;
+            offspringPerAge[k] = -1.0 / (12.0 * lifespan) * Math.pow((k - 1.0 * lifespan / 3.0),2) + offspringConstant * numOffspring;
+            if(offspringPerAge[k] < 0){
+                offspringPerAge[k] = 0;
+            }
         }
         
     }
